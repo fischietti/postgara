@@ -1,0 +1,27 @@
+name: build-and-publish
+on: workflow_dispatch
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - run: npm install
+
+      - run: npm run fetch
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
+      - run: npm run build
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: docs
+          branch: gh-pages
