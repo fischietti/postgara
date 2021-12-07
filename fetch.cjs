@@ -11,7 +11,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
 
 function fetch() {
   getRows((rows) => {
-    const restaurants = parseRestaurants(rows);
+    const restaurants = rows.map(parseRestaurant);
     const json = JSON.stringify(restaurants, null, 2);
     writeFileSync("src/lib/Map/restaurants.json", json);
   });
@@ -19,34 +19,14 @@ function fetch() {
 
 /** Data Parsing **/
 
-function parseRestaurants(rows) {
-  return {
-    type: "FeatureCollection",
-    features: rows.map(toFeature),
-  };
-}
-
-function toFeature(row) {
-  return {
-    type: "Feature",
-    properties: extractProperties(row),
-    geometry: {
-      type: "Point",
-      coordinates: extractCoordinates(row),
-    },
-  };
-}
-
-function extractProperties(row) {
+function parseRestaurant(row) {
   return {
     name: row["Nome"],
     proposalDate: row["DataProposta"].substr(0, 8),
     address: row["Indirizzo"],
     google: row["LinkGoogle"],
+    coordinates: row["Coordinate"].split(/[\/,]/).map(Number),
   };
-}
-function extractCoordinates(row) {
-  return row["Coordinate"].split(/[\/,]/).reverse().map(Number);
 }
 
 /** Data Retrieval **/

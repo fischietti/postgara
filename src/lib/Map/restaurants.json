@@ -1,18 +1,9 @@
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Dominos",
-        "proposalDate": "06/12/20",
-        "address": "Piazza Emilio Salgari 20137 Milano",
-        "google": "https://goo.gl/maps/P4CkTfThzDUhpka76"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [9.22027, 45.44995]
-      }
-    }
-  ]
-}
+[
+  {
+    "name": "Dominos",
+    "proposalDate": "06/12/20",
+    "address": "Piazza Emilio Salgari 20137 Milano",
+    "google": "https://goo.gl/maps/P4CkTfThzDUhpka76",
+    "coordinates": [45.44995, 9.22027]
+  }
+]
