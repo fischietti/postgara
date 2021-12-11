@@ -13,11 +13,11 @@ Il sito è statico, hostato su Github Pages ed ri-buildato periodicamente tramit
 
 ## Strumenti
 
-|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+|||
+|----|---|
 |[Svelte](https://svelte.dev/) |Framework web |
 |[SvelteKit](https://kit.svelte.dev/) |Build del sito statico |
 |[TailwindCSS](https://tailwindcss.com/) |Prevent me from touching CSS files|
-|[Typescript](https://www.typescriptlang.org/) ||
 |[Leaflet](https://leafletjs.com/) |Mappa interattiva |
 |[OpenStreetMap](https://www.openstreetmap.org/) |Fonte dati geografici |
 |[MaterialIcons](https://fonts.google.com/icons?selected=Material+Icons&icon.query=map) |Set di icone|
