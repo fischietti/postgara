@@ -2,4 +2,4 @@
   import Map from "$lib/Map.svelte";
 </script>
 
-<Map classname="h-screen" />
+<Map classname="h-full" />
