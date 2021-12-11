@@ -36,7 +36,7 @@
 </script>
 
 <div
-  class="absolute top-4 left-4 right-4 sm:right-1/2 flex flex-col bg-white text-base"
+  class="absolute top-4 left-4 right-4 sm:right-2/3 flex flex-col bg-white text-base"
   style="z-index: 1000;"
   on:pointerenter
   on:pointerleave

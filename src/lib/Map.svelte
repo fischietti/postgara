@@ -42,9 +42,10 @@
   let map: Nullable<Map> = null;
 
   const DEFAULT_ZOOM = 13;
+  const CLOSE_ZOOM = 16;
 
   function setLocation(latLong: LatLngExpression) {
-    map?.setView(latLong, DEFAULT_ZOOM);
+    map?.setView(latLong, CLOSE_ZOOM);
   }
 
   async function initializeMap() {
