@@ -4,16 +4,25 @@ require("dotenv").config();
 const { writeFileSync } = require("fs");
 
 const SPREADSHEET = "17tC2SE2qxwq7CcpEAX2VSYb6swkA4k2fb85CUBQ20m0";
-const RANGE = "Database!A1:E1000";
+const RESTAURANTS = "Ristoranti!A1:H1000";
+const ZONES = "Zone!A1:B1000";
 
 const SERVICE_ACCOUNT = process.env.SERVICE_ACCOUNT;
 const PRIVATE_KEY = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
 
 function fetch() {
-  getRows((rows) => {
-    const restaurants = rows.map(parseRestaurant);
-    const json = JSON.stringify(restaurants, null, 2);
-    writeFileSync("src/lib/Map/restaurants.json", json);
+  getJWT((jwt) => {
+    getRows(jwt, RESTAURANTS, (rows) => {
+      const restaurants = rows.map(parseRestaurant).filter(isValidRestaurant);
+      const json = JSON.stringify(restaurants, null, 2);
+      writeFileSync("src/lib/Map/restaurants.json", json);
+    });
+
+    getRows(jwt, ZONES, (rows) => {
+      const zones = rows.map(parseZone).filter(isValidZone);
+      const json = JSON.stringify(zones, null, 2);
+      writeFileSync("src/lib/Map/zones.json", json);
+    });
   });
 }
 
@@ -24,20 +33,46 @@ function parseRestaurant(row) {
     name: row["Nome"],
     proposalDate: row["DataProposta"].substr(0, 8),
     address: row["Indirizzo"],
-    google: row["LinkGoogle"],
-    coordinates: row["Coordinate"].split(/[\/,]/).map(Number),
+    coordinates: parseCoordinates(row["Coordinate"]),
+    zone: row["Zona"] || null,
+    google: row["LinkGoogle"] || null,
+    tripadvisor: row["LinkTripadvisor"] || null,
+    note: row["Note"] || null,
   };
+}
+
+function isValidRestaurant(res) {
+  return (
+    res.name && res.address && res.coordinates && res.coordinates.length == 2
+  );
+}
+
+function parseZone(row) {
+  return {
+    name: row["Nome"],
+    coordinates: parseCoordinates(row["Coordinate"]),
+  };
+}
+
+function isValidZone(zone) {
+  return zone.name && zone.coordinates && zone.coordinates.length == 2;
+}
+
+function parseCoordinates(coords) {
+  try {
+    return coords.split(/[\/,]/).map(Number);
+  } catch {
+    return null;
+  }
 }
 
 /** Data Retrieval **/
 
-function getRows(resolve) {
-  getJWT((jwt) => {
-    getValues(jwt, SPREADSHEET, RANGE, (values) => {
-      const header = values[0];
-      const rows = values.slice(1).map(rowBuilder(header));
-      resolve(rows);
-    });
+function getRows(jwt, range, resolve) {
+  getValues(jwt, SPREADSHEET, range, (values) => {
+    const header = values[0];
+    const rows = values.slice(1).map(rowBuilder(header));
+    resolve(rows);
   });
 }
 

@@ -1,38 +1,23 @@
-# create-svelte
+# Postgara
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+Una [mappa interattiva](https://fischietti.github.io/postgara/) di posti dove andare a mangiare dopo la partita.
 
-## Creating a project
+## Contribuisci
 
-If you're seeing this, you've probably already done this step. Congrats!
+Consiglia un nuovo posto compilando [questo form](https://docs.google.com/forms/d/e/1FAIpQLSfX8cw8hqlewxoig6UUvKbgxjjIizP3qUU5S1ZLJpZqaRoClQ/viewform?usp=sf_link)
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## Architettura
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+L'anagrafica dei posti è censita su un Google Sheet che viene aggiornato manualmente a seguito di segnalazioni tramite Google Form.  
+Il sito è statico, hostato su Github Pages ed ri-buildato periodicamente tramite Github Actions recuperando l'anagrafica aggiornata.
 
-> Note: the `@next` is temporary
+## Strumenti
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+|[Svelte](https://svelte.dev/) |Framework web |
+|[SvelteKit](https://kit.svelte.dev/) |Build del sito statico |
+|[TailwindCSS](https://tailwindcss.com/) |Prevent me from touching CSS files|
+|[Typescript](https://www.typescriptlang.org/) ||
+|[Leaflet](https://leafletjs.com/) |Mappa interattiva |
+|[OpenStreetMap](https://www.openstreetmap.org/) |Fonte dati geografici |
+|[MaterialIcons](https://fonts.google.com/icons?selected=Material+Icons&icon.query=map) |Set di icone|

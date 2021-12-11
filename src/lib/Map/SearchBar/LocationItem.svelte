@@ -1,5 +1,8 @@
 <script lang="ts">
-  export let itemLabel: string;
+  import { assets } from "$app/paths";
+
+  export let label: string;
+  export let icon: string | undefined = undefined;
   export let highlighted = false;
   export let disabled = false;
 </script>
@@ -10,7 +13,12 @@
   class:autocomplete-active={highlighted}
   on:click
 >
-  {itemLabel}
+  <div class="flex">
+    {#if icon}
+      <img class="w-6 mr-2" src="{assets}/icons/{icon}.svg" alt="Place" />
+    {/if}
+    <span class="flex-1">{label}</span>
+  </div>
 </li>
 
 <style>

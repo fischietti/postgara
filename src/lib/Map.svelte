@@ -8,7 +8,13 @@
   import SearchBar from "./Map/SearchBar.svelte";
 
   import type { Nullable } from "$lib/types";
-  import type { Map, LatLngExpression, Layer, LocationEvent } from "leaflet";
+  import type {
+    Map,
+    LatLngExpression,
+    Layer,
+    LocationEvent,
+    LeafletMouseEvent,
+  } from "leaflet";
   import type { Restaurant } from "./Map/locations";
   import type { FeatureCollection, Feature, Point } from "geojson";
   import type { SelectedLocation } from "./Map/SearchBar.svelte";
@@ -24,10 +30,12 @@
 
   function select(selected: Restaurant) {
     restaurant = selected;
+    setLocation(restaurant.coordinates);
   }
 
   function deselect() {
     restaurant = null;
+    enableMapInteraction();
   }
 
   // Leaflet map
@@ -67,6 +75,14 @@
     }
     map.on("locationfound", onLocationFound);
     map.locate({ setView: true, maxZoom: 16, watch: false });
+
+    // utility for showing coordinates
+    map.on("contextmenu", (e: LeafletMouseEvent) => {
+      L.popup()
+        .setLatLng(e.latlng)
+        .setContent(`${e.latlng.lat.toFixed(6)},${e.latlng.lng.toFixed(6)}`)
+        .openOn(map);
+    });
 
     // add restaurants
     const restaurantCollection: FeatureCollection = {
@@ -125,9 +141,11 @@
 <div id="map" class={classNames(classname)} bind:clientHeight={mapHeight}>
   <SearchBar
     maxOverflow={mapHeight / 2}
-    on:search={handleSearch}
-    on:mouseenter={disableMapInteraction}
-    on:mouseleave={enableMapInteraction}
+    on:search-select={handleSearch}
+    on:pointerdown={disableMapInteraction}
+    on:pointerup={enableMapInteraction}
+    on:pointerenter={disableMapInteraction}
+    on:pointerleave={enableMapInteraction}
   />
 
   <Contribute />
@@ -136,8 +154,10 @@
     <RestaurantPanel
       {restaurant}
       on:close={deselect}
-      on:mouseenter={disableMapInteraction}
-      on:mouseleave={enableMapInteraction}
+      on:pointerdown={disableMapInteraction}
+      on:pointerup={enableMapInteraction}
+      on:pointerenter={disableMapInteraction}
+      on:pointerleave={enableMapInteraction}
     />
   {/if}
 </div>

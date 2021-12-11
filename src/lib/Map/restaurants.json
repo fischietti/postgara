@@ -3,7 +3,20 @@
     "name": "Dominos",
     "proposalDate": "06/12/20",
     "address": "Piazza Emilio Salgari 20137 Milano",
+    "coordinates": [45.44995, 9.22027],
+    "zone": "Milano",
     "google": "https://goo.gl/maps/P4CkTfThzDUhpka76",
-    "coordinates": [45.44995, 9.22027]
+    "tripadvisor": null,
+    "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam libero justo, blandit sit amet tincidunt vitae, auctor at purus. Morbi efficitur lacus in aliquet gravida. Curabitur nisi tellus, ultrices id erat et, varius volutpat ex. Etiam fringilla volutpat interdum. Nullam faucibus diam eros, sed molestie sem facilisis a. Cras pharetra dictum feugiat. Orci varius natoque penatibus et magnis dis parturient montes, nascetu,r ridiculus mus. Donec id eros at tortor eleifend ullamcorper. Nulla laoreet, erat eu fermentum laoreet, ante dui commodo ipsum, non pulvinar purus nulla sit amet turpis. In semper tincidunt cursus. In felis lorem, laoreet at maximus lobortis, bibendum quis turpis. Curabitur pulvinar vitae nisl non tempor. Donec vestibulum at leo consequat ornare. Suspendisse volutpat tristique dui id suscipit. Donec rhoncus lectus tristique convallis dapibus."
+  },
+  {
+    "name": "Norman",
+    "proposalDate": "06/12/20",
+    "address": "Viale Umbria, 50, 20135 Milano MI",
+    "coordinates": [45.4525408, 9.2148123],
+    "zone": null,
+    "google": null,
+    "tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187849-d1081318-Reviews-Norman-Milan_Lombardy.html",
+    "note": null
   }
 ]

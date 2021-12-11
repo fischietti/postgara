@@ -1,12 +1,12 @@
 <div
-  class="absolute bottom-8 left-1/3 sm:left-0 w-1/3 flex bg-white text-base"
+  class="absolute bottom-8 w-full sm:w-1/3 flex justify-center sm:justify-start text-base"
   style="z-index: 1000"
 >
   <a
-    class="flex-1 text-center"
-    href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfX8cw8hqlewxoig6UUvKbgxjjIizP3qUU5S1ZLJpZqaRoClQ"
+    class="mx-4 px-2 py-0.5 rounded-lg text-center bg-white"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSfX8cw8hqlewxoig6UUvKbgxjjIizP3qUU5S1ZLJpZqaRoClQ/viewform?usp=sf_link"
     target="_blank"
   >
-    Segnala un locale
+    consiglia un ristorante
   </a>
 </div>

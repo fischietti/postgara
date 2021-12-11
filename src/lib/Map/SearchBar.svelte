@@ -9,30 +9,43 @@
   import LocationSelect from "./SearchBar/LocationSelect.svelte";
   import type { Item } from "./SearchBar/LocationSelect.svelte";
 
-  import { restaurants } from "./locations";
+  import { zones, restaurants } from "./locations";
 
   export let maxOverflow: number;
+
+  const zoneItems: Item[] = zones.map((zone) => ({
+    value: zone,
+    label: zone.name,
+    icon: "city",
+  }));
 
   const restaurantItems: Item[] = restaurants.map((res) => ({
     value: res,
     label: res.name,
+    icon: "place",
   }));
 
-  const items = restaurantItems;
+  const items = zoneItems.concat(restaurantItems);
 
   const dispatch = createEventDispatcher();
 
   function handleSelect({ detail }: CustomEvent<Item>) {
     const event = { coordinates: detail.value.coordinates };
-    dispatch("search", event);
+    dispatch("search-select", event);
   }
 </script>
 
 <div
-  class="absolute top-4 left-1/3 sm:left-4 w-1/3 flex flex-col bg-white text-base"
+  class="absolute top-4 left-4 right-4 sm:right-1/2 flex flex-col bg-white text-base"
   style="z-index: 1000;"
-  on:mouseenter
-  on:mouseleave
+  on:pointerenter
+  on:pointerleave
 >
-  <LocationSelect {items} {maxOverflow} on:select={handleSelect} />
+  <LocationSelect
+    {items}
+    {maxOverflow}
+    on:select={handleSelect}
+    on:focus
+    on:blur
+  />
 </div>

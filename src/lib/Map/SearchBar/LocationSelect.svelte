@@ -2,10 +2,12 @@
   export type Item = {
     value: any;
     label: string;
+    icon?: string;
   };
 </script>
 
 <script lang="ts">
+  import { assets } from "$app/paths";
   import { createEventDispatcher } from "svelte";
   import LocationItem from "./LocationItem.svelte";
 
@@ -20,7 +22,7 @@
     searchText = "";
   }
 
-  /* On select */
+  /* Events */
 
   const dispatch = createEventDispatcher();
 
@@ -74,14 +76,18 @@
 <svelte:window on:keydown={onKeyboardEvent} />
 
 <div class="flex flex-col">
-  <input
-    class="p-3 border focus:outline-none"
-    type="text"
-    placeholder="Cerca"
-    bind:value={searchText}
-  />
+  <div class="flex border">
+    <input
+      class="flex-1 p-3 focus:outline-none"
+      type="text"
+      placeholder="Cerca"
+      bind:value={searchText}
+    />
 
-  <!-- TODO clear button-->
+    <button class="mr-2 w-8" on:click={clear}>
+      <img src="{assets}/icons/close.svg" alt="Cancella" />
+    </button>
+  </div>
 
   {#if searchText}
     {#if autocompleteItems.length}
@@ -92,7 +98,8 @@
       >
         {#each autocompleteItems as item, i}
           <LocationItem
-            itemLabel={item.label}
+            label={item.label}
+            icon={item.icon}
             highlighted={i === arrowIndex}
             on:click={() => selectItem(item)}
           />
@@ -100,7 +107,7 @@
       </ul>
     {:else}
       <ul>
-        <LocationItem itemLabel="Nessun risultato" disabled />
+        <LocationItem label="Nessun risultato" disabled />
       </ul>
     {/if}
   {/if}
